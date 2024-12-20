@@ -1,7 +1,7 @@
 /* Basic styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: gray;  /* Change the background to gray */
+    background-color: gray;  /* Gray background */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -20,6 +20,7 @@ button {
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 10px;
 }
 
 button:hover {
