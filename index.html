@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Click Counter</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to CSS -->
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -14,12 +16,18 @@
         <p>Counter: <span id="counterValue">0</span></p>
 
         <div>
-            <button id="likeButton">Like</button>
+            <!-- Like button with thumbs up icon -->
+            <button id="likeButton">
+                <i class="fas fa-thumbs-up"></i> <!-- Font Awesome thumbs up icon -->
+            </button>
             <p>Likes: <span id="likeCount">0</span></p>
         </div>
 
         <div>
-            <button id="dislikeButton">Dislike</button>
+            <!-- Dislike button with thumbs down icon -->
+            <button id="dislikeButton">
+                <i class="fas fa-thumbs-down"></i> <!-- Font Awesome thumbs down icon -->
+            </button>
             <p>Dislikes: <span id="dislikeCount">0</span></p>
         </div>
 

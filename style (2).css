@@ -12,7 +12,7 @@ body {
 }
 
 button {
-    padding: 20px 40px;
+    padding: 20px;
     font-size: 24px;
     background-color: red;
     color: white;
@@ -25,6 +25,11 @@ button {
 
 button:hover {
     background-color: darkred;
+}
+
+/* Make the thumbs-up and thumbs-down icons larger */
+button i {
+    font-size: 32px; /* Increase icon size */
 }
 
 p {
