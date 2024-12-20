@@ -2,6 +2,7 @@
 const likeButton = document.getElementById('likeButton');
 const dislikeButton = document.getElementById('dislikeButton');
 const counterButton = document.getElementById('counterButton');
+const resetButton = document.getElementById('resetButton');  // Reset button
 
 const likeCountDisplay = document.getElementById('likeCount');
 const dislikeCountDisplay = document.getElementById('dislikeCount');
@@ -36,4 +37,14 @@ counterButton.addEventListener('click', function() {
     counter++;  // Increment the general counter
     counterDisplay.textContent = counter;  // Update the general counter on the page
     localStorage.setItem('counter', counter);  // Save the general counter to localStorage
+});
+
+// Function to reset the like and dislike counters
+resetButton.addEventListener('click', function() {
+    likeCount = 0;  // Reset the like counter
+    dislikeCount = 0;  // Reset the dislike counter
+    likeCountDisplay.textContent = likeCount;  // Update the display for likes
+    dislikeCountDisplay.textContent = dislikeCount;  // Update the display for dislikes
+    localStorage.removeItem('likeCount');  // Remove the like count from localStorage
+    localStorage.removeItem('dislikeCount');  // Remove the dislike count from localStorage
 });
