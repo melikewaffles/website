@@ -3,17 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird Launcher</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Button Click Counter</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to CSS -->
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <!-- Button to launch Flappy Bird -->
-        <button id="flappyButton">Play Flappy Bird</button>
-        <!-- Game canvas (hidden by default) -->
-        <canvas id="flappyCanvas" width="480" height="320" style="display: none;"></canvas>
+        <h1>Button Click Counter</h1>
+        <p>Click the button to increase the counter:</p>
+        <button id="counterButton">Click me!</button>
+        <p>Counter: <span id="counterValue">0</span></p>
+
+        <div>
+            <!-- Like button with thumbs up icon -->
+            <button id="likeButton">
+                <i class="fas fa-thumbs-up"></i> <!-- Font Awesome thumbs up icon -->
+            </button>
+            <p>Likes: <span id="likeCount">0</span></p>
+        </div>
+
+        <div>
+            <!-- Dislike button with thumbs down icon -->
+            <button id="dislikeButton">
+                <i class="fas fa-thumbs-down"></i> <!-- Font Awesome thumbs down icon -->
+            </button>
+            <p>Dislikes: <span id="dislikeCount">0</span></p>
+        </div>
+
+        <div>
+            <button id="resetButton">Reset Likes/Dislikes</button> <!-- Reset button -->
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Link to JS -->
 </body>
 </html>
