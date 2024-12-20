@@ -1,7 +1,7 @@
 /* Basic styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: pink;  /* Change the background to pink */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -12,18 +12,18 @@ body {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
+    padding: 20px 40px;
+    font-size: 24px;
+    background-color: red;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: darkred;
 }
 
 p {
