@@ -1,101 +1,50 @@
-const flappyBirdButton = document.getElementById('flappyBirdButton');
-const flappyCanvas = document.getElementById('flappyCanvas');
-const ctx = flappyCanvas.getContext('2d');
+// Get references to the buttons and counter values
+const likeButton = document.getElementById('likeButton');
+const dislikeButton = document.getElementById('dislikeButton');
+const counterButton = document.getElementById('counterButton');
+const resetButton = document.getElementById('resetButton');  // Reset button
 
-// Game assets
-const birdImg = new Image();
-birdImg.src = 'bird.png'; // Path to bird sprite
-const pipeImg = new Image();
-pipeImg.src = 'pipe.png'; // Path to pipe image
-const groundImg = new Image();
-groundImg.src = 'ground.png'; // Path to ground image
+const likeCountDisplay = document.getElementById('likeCount');
+const dislikeCountDisplay = document.getElementById('dislikeCount');
+const counterDisplay = document.getElementById('counterValue');
 
-let birdY = 150, birdVelocity = 0, gravity = 0.5;
-let isGameRunning = false;
-let score = 0;
+// Initialize counters from localStorage (or set to 0 if not available)
+let likeCount = localStorage.getItem('likeCount') ? parseInt(localStorage.getItem('likeCount')) : 0;
+let dislikeCount = localStorage.getItem('dislikeCount') ? parseInt(localStorage.getItem('dislikeCount')) : 0;
+let counter = localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0;
 
-// Obstacle and ground data
-let obstacles = [];
-const pipeWidth = 52, gapHeight = 120;
+// Display the current counter values
+likeCountDisplay.textContent = likeCount;
+dislikeCountDisplay.textContent = dislikeCount;
+counterDisplay.textContent = counter;
 
-// Start Flappy Bird
-flappyBirdButton.addEventListener('click', startFlappyBird);
+// Function to increase the like counter
+likeButton.addEventListener('click', function() {
+    likeCount++;  // Increment the like counter
+    likeCountDisplay.textContent = likeCount;  // Update the like counter on the page
+    localStorage.setItem('likeCount', likeCount);  // Save the like counter to localStorage
+});
 
-function startFlappyBird() {
-    flappyCanvas.style.display = 'block';
-    isGameRunning = true;
-    obstacles = Array.from({ length: 3 }, (_, i) => ({
-        x: flappyCanvas.width + i * 200,
-        gapStart: Math.random() * (flappyCanvas.height - gapHeight - 100) + 50,
-    }));
-    birdY = 150; birdVelocity = 0; score = 0;
-    requestAnimationFrame(updateGame);
-}
+// Function to increase the dislike counter
+dislikeButton.addEventListener('click', function() {
+    dislikeCount++;  // Increment the dislike counter
+    dislikeCountDisplay.textContent = dislikeCount;  // Update the dislike counter on the page
+    localStorage.setItem('dislikeCount', dislikeCount);  // Save the dislike counter to localStorage
+});
 
-// Update game state
-function updateGame() {
-    if (!isGameRunning) return;
+// Function to increase the general counter
+counterButton.addEventListener('click', function() {
+    counter++;  // Increment the general counter
+    counterDisplay.textContent = counter;  // Update the general counter on the page
+    localStorage.setItem('counter', counter);  // Save the general counter to localStorage
+});
 
-    ctx.clearRect(0, 0, flappyCanvas.width, flappyCanvas.height);
-
-    // Background gradient
-    const gradient = ctx.createLinearGradient(0, 0, 0, flappyCanvas.height);
-    gradient.addColorStop(0, '#87CEEB');
-    gradient.addColorStop(1, '#ffffff');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, flappyCanvas.width, flappyCanvas.height);
-
-    // Bird
-    birdVelocity += gravity;
-    birdY += birdVelocity;
-
-    if (birdY < 0 || birdY > flappyCanvas.height - 50) {
-        endGame();
-        return;
-    }
-    ctx.drawImage(birdImg, 50, birdY, 34, 24);
-
-    // Obstacles
-    obstacles.forEach(obstacle => {
-        ctx.drawImage(pipeImg, obstacle.x, 0, pipeWidth, obstacle.gapStart);
-        ctx.drawImage(pipeImg, obstacle.x, obstacle.gapStart + gapHeight, pipeWidth, flappyCanvas.height);
-        obstacle.x -= 2;
-
-        // Collision detection
-        if (50 < obstacle.x + pipeWidth &&
-            50 + 34 > obstacle.x &&
-            (birdY < obstacle.gapStart || birdY + 24 > obstacle.gapStart + gapHeight)) {
-            endGame();
-            return;
-        }
-
-        // Reset pipe position
-        if (obstacle.x + pipeWidth < 0) {
-            obstacle.x = flappyCanvas.width;
-            obstacle.gapStart = Math.random() * (flappyCanvas.height - gapHeight - 100) + 50;
-            score++;
-        }
-    });
-
-    // Draw score
-    ctx.fillStyle = '#000';
-    ctx.font = '20px Arial';
-    ctx.fillText(`Score: ${score}`, 10, 20);
-
-    // Ground
-    ctx.drawImage(groundImg, 0, flappyCanvas.height - 50, flappyCanvas.width, 50);
-
-    requestAnimationFrame(updateGame);
-}
-
-// End game
-function endGame() {
-    isGameRunning = false;
-    alert(`Game Over! Score: ${score}`);
-    flappyCanvas.style.display = 'none';
-}
-
-// Jump
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && isGameRunning) birdVelocity = -8;
+// Function to reset the like and dislike counters
+resetButton.addEventListener('click', function() {
+    likeCount = 0;  // Reset the like counter
+    dislikeCount = 0;  // Reset the dislike counter
+    likeCountDisplay.textContent = likeCount;  // Update the display for likes
+    dislikeCountDisplay.textContent = dislikeCount;  // Update the display for dislikes
+    localStorage.removeItem('likeCount');  // Remove the like count from localStorage
+    localStorage.removeItem('dislikeCount');  // Remove the dislike count from localStorage
 });
